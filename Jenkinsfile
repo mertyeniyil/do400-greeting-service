@@ -20,7 +20,14 @@ pipeline{
                 sh "npm test"
             }
         }
-
-        // Add the "Deploy" stage here
+      stage('Deploy') {
+    steps {
+        sh '''
+            oc project qiwapz-greetings
+            oc start-build greeting-service --follow --wait
+        '''
     }
+}
+    
+}
 }
